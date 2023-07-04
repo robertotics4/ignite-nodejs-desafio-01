@@ -1,3 +1,8 @@
+type TaskConstructorProps = {
+  title: string;
+  description?: string;
+  updated_at: Date;
+};
 export class Task {
   id?: string;
 
@@ -7,12 +12,11 @@ export class Task {
 
   completed_at?: Date;
 
-  updated_at?: Date;
+  updated_at: Date;
 
-  constructor(taskData: Task) {
+  constructor(taskData: TaskConstructorProps) {
     this.title = taskData.title;
     this.description = taskData.description;
-    this.completed_at = taskData.completed_at;
     this.updated_at = taskData.updated_at;
   }
 }

@@ -1,13 +1,11 @@
 import { ITaskRepository, Task } from '@/domain';
 import { randomUUID } from 'node:crypto';
 
-export class TaskRepository implements ITaskRepository {
+export class TaskRepositoryInMemory implements ITaskRepository {
   private readonly tasks: Task[] = [];
 
   create(data: Omit<Task, 'id'>): Task {
-    const task = new Task(data);
-    task.id = randomUUID();
-
+    const task = { id: randomUUID(), ...data };
     this.tasks.push(task);
 
     return task;

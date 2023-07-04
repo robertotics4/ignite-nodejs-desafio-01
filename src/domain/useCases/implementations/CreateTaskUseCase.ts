@@ -1,9 +1,24 @@
 import { Task } from '@/domain/entities';
-import { CreateTask, ICreateTask } from '../interfaces';
+import { ITaskRepository } from '@/domain/contracts';
+import { inject, injectable } from 'tsyringe';
+import { CreateTask, ICreateTaskUseCase } from '../interfaces';
 
-export class CreateTaskUseCase implements ICreateTask {
-  execute(data: CreateTask.Input): Task {
-    console.log(data);
-    throw new Error('Method not implemented.');
+@injectable()
+export class CreateTaskUseCase implements ICreateTaskUseCase {
+  constructor(
+    @inject('TaskRepository')
+    private tasksRepository: ITaskRepository,
+  ) {}
+
+  execute({ title, description }: CreateTask.Input): Task {
+    const task = new Task({
+      title,
+      description,
+      updated_at: new Date(),
+    });
+
+    const result = this.tasksRepository.create(task);
+
+    return result;
   }
 }
