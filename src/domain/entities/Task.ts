@@ -1,5 +1,3 @@
-import { randomUUID } from 'node:crypto';
-
 export class Task {
   id?: string;
 
@@ -12,11 +10,6 @@ export class Task {
   updated_at?: Date;
 
   constructor(taskData: Task) {
-    if (!taskData.id) {
-      this.id = randomUUID();
-    }
-
-    this.id = taskData.id;
     this.title = taskData.title;
     this.description = taskData.description;
     this.completed_at = taskData.completed_at;
