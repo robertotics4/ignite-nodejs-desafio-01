@@ -14,6 +14,8 @@ export class CreateTaskUseCase implements ICreateTaskUseCase {
     const task = new Task({
       title,
       description,
+      completed_at: null,
+      created_at: new Date(),
       updated_at: new Date(),
     });
 
